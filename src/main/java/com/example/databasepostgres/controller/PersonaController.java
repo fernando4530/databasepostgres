@@ -13,17 +13,22 @@ public class PersonaController {
     PersonaService personaService;
 
     @GetMapping(value = "/persona/{id}")
-    public Persona getPersona(@PathVariable Long id) {
+    public Persona getPersonaById(@PathVariable Long id) {
         Persona persona = personaService.getPersonaById(id);
         return persona;
     }
 
     @PostMapping(value = "/persona")
     public Persona addPersona(@RequestBody Persona persona) {
-        Persona personaSaved = personaService.save(persona);
+        Persona personaSaved = personaService.addPersona(persona);
         return personaSaved;
     }
 
-
+    @DeleteMapping(value = "/persona/{id}")
+    public String deletePersona(@PathVariable Long id) {
+        System.out.println("eliminando usuario: " + id);
+        String mensaje = personaService.deletePersona(id);
+        return mensaje;
+    }
 
 }

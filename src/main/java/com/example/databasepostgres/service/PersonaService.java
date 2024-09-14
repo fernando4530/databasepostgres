@@ -18,9 +18,20 @@ public class PersonaService {
         return persona;
     }
 
-    public Persona save(Persona persona) {
+    public Persona addPersona(Persona persona) {
         Persona personaSaved = personaRepository.save(persona);
         return personaSaved;
+    }
+
+    public String deletePersona(Long id) {
+        Persona persona = personaRepository.findById(id).orElse(null);
+
+        if (persona == null) {
+            return "no se encontró usuario existente para eliminar";
+        } else {
+            personaRepository.deleteById(id);
+            return "usuario eliminado con éxito";
+        }
     }
 
 
